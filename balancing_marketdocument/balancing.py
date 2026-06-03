@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -9,8 +9,8 @@ class BMDRoot(ABC):
 
 @dataclass
 class BMDReason(BMDRoot):
-    code: str | None
-    text: str | None
+    code: str | None = None
+    text: str | None = None
 
     def to_dict(self):
         return {
@@ -20,16 +20,16 @@ class BMDReason(BMDRoot):
 
 @dataclass
 class BMDPoint(BMDRoot):
-    position: int | None
-    quantity: float | None
-    secondaryQuantity: float | None
-    price_amount: float | None
-    financialPrice_amount: float | None
-    imbalance_Price_amount: float | None
-    procurement_Price_amount: float | None
-    settlement_amount_amount: float | None
-    quality: str | None
-    reason: list[BMDReason]
+    position: int | None = None
+    quantity: float | None = None
+    secondaryQuantity: float | None = None
+    price_amount: float | None = None
+    financialPrice_amount: float | None = None
+    imbalance_Price_amount: float | None = None
+    procurement_Price_amount: float | None = None
+    settlement_amount_amount: float | None = None
+    quality: str | None = None
+    reason: list[BMDReason] = field(default_factory=list)
 
     def to_dict(self):
         return {
@@ -49,8 +49,8 @@ class BMDPoint(BMDRoot):
 
 @dataclass
 class BMDTimeInterval(BMDRoot):
-    start: str | None
-    end: str | None
+    start: str | None = None
+    end: str | None = None
 
     def to_dict(self):
         return {
@@ -60,9 +60,9 @@ class BMDTimeInterval(BMDRoot):
 
 @dataclass
 class BMDPeriod(BMDRoot):
-    timeInterval: BMDTimeInterval
-    resolution: str | None
-    point: list[BMDPoint]
+    timeInterval: BMDTimeInterval | None = None
+    resolution: str | None = None
+    point: list[BMDPoint] = field(default_factory=list)
 
     def to_dict(self):
         return {
@@ -75,27 +75,27 @@ class BMDPeriod(BMDRoot):
 
 @dataclass
 class BMDTimeSeries(BMDRoot):
-    mRID: str | None
-    businessType: str | None
-    product: str | None
-    objectAggregation: str | None
-    in_Domain_mRID: str | None
-    out_Domain_mRID: str | None
-    marketEvaluationPoint_mRID: str | None
-    auction_mRID: str | None
-    auction_category: str | None
-    acquiring_Domain_mRID: str | None
-    connecting_Domain_mRID: str | None
-    registeredResource_mRID: str | None
-    resourceProvider_MarketParticipant_mRID: str | None
-    resourceProvider_MarketParticipant_marketRole_type: str | None
-    quantity_Measure_Unit_name: str | None
-    curveType: str | None
-    flowDirection_direction: str | None
-    direction: str | None
-    settlementAmount_currency: str | None
-    price_Measure_Unit_name: str | None
-    Period: list[BMDPeriod]
+    mRID: str | None = None
+    businessType: str | None = None
+    product: str | None = None
+    objectAggregation: str | None = None
+    in_Domain_mRID: str | None = None
+    out_Domain_mRID: str | None = None
+    marketEvaluationPoint_mRID: str | None = None
+    auction_mRID: str | None = None
+    auction_category: str | None = None
+    acquiring_Domain_mRID: str | None = None
+    connecting_Domain_mRID: str | None = None
+    registeredResource_mRID: str | None = None
+    resourceProvider_MarketParticipant_mRID: str | None = None
+    resourceProvider_MarketParticipant_marketRole_type: str | None = None
+    quantity_Measure_Unit_name: str | None = None
+    curveType: str | None = None
+    flowDirection_direction: str | None = None
+    direction: str | None = None
+    settlementAmount_currency: str | None = None
+    price_Measure_Unit_name: str | None = None
+    Period: list[BMDPeriod] = field(default_factory=list)
 
     def to_dict(self):
         return {
@@ -126,8 +126,8 @@ class BMDTimeSeries(BMDRoot):
 
 @dataclass
 class BMDTimePeriodTimeInteval(BMDRoot):
-    start: str | None
-    end: str | None
+    start: str | None = None
+    end: str | None = None
 
     def to_dict(self):
         return {
@@ -137,24 +137,24 @@ class BMDTimePeriodTimeInteval(BMDRoot):
 
 @dataclass
 class BalancingMarketDocument(BMDRoot):
-    mRID: str | None
-    revisionNumber: str | None
-    _type: str | None
-    process_processType: str | None
-    sender_MarketParticipant_mRID: str | None
-    sender_MarketParticipant_marketRole_type: str | None
-    receiver_MarketParticipant_mRID: str
-    receiver_MarketParticipant_marketRole_type: str | None
-    createdDateTime: str | None
-    time_Period_timeInterval: BMDTimePeriodTimeInteval
-    domain_mRID: str | None
-    subject_MarketParticipant_mRID: str | None
-    subject_MarketParticipant_marketRole_type: str | None
-    businessType: str | None
-    area_Domain_mRID: str | None
-    currency_Unit_name: str | None
-    price_Measure_Unit_name: str | None
-    TimeSeries: list[BMDTimeSeries]
+    mRID: str | None = None
+    revisionNumber: str | None = None
+    _type: str | None = None
+    process_processType: str | None = None
+    sender_MarketParticipant_mRID: str | None = None
+    sender_MarketParticipant_marketRole_type: str | None = None
+    receiver_MarketParticipant_mRID: str | None = None
+    receiver_MarketParticipant_marketRole_type: str | None = None
+    createdDateTime: str | None = None
+    time_Period_timeInterval: BMDTimePeriodTimeInteval | None = None
+    domain_mRID: str | None = None
+    subject_MarketParticipant_mRID: str | None = None
+    subject_MarketParticipant_marketRole_type: str | None = None
+    businessType: str | None = None
+    area_Domain_mRID: str | None = None
+    currency_Unit_name: str | None = None
+    price_Measure_Unit_name: str | None = None
+    TimeSeries: list[BMDTimeSeries] = field(default_factory=list)
 
     def to_dict(self):
         return {
