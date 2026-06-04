@@ -118,6 +118,13 @@ class RBMDPeriod(RBMDRoot):
     resolution: str = None
     point: list[RBMDPoint] = field(default_factory=list)
 
+    def to_dict(self):
+        return {
+            "timeInterval": self.timeInterval.to_dict(),
+            "resolution": self.resolution,
+            "Point": [p.to_dict() for p in self.point]
+        }
+
 @dataclass
 class RBMDMridList(RBMDRoot):
     mRID: str = None
