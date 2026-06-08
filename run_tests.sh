@@ -13,4 +13,6 @@ for full_path in test/*_test.py; do
     fi
 done
 
+go test ./...
+
 echo "Generating test cases exeecuted successfully!"
